@@ -1,0 +1,17 @@
+{
+  // Bar text, hover tooltip and warning/critical class come from scripts/sysinfo.sh
+  "custom/disk": {
+    "exec": "$HOME/.config/waybar/scripts/sysinfo.sh disk",
+    "return-type": "json",
+    "interval": 60,
+    "format": "󱙋 <span size='11pt'>{}</span>",
+    "escape": true
+  },
+  "custom/memory": {
+    "exec": "$HOME/.config/waybar/scripts/sysinfo.sh mem",
+    "return-type": "json",
+    "interval": 15,
+    "format": "󰍛 <span size='11pt'>{}</span>",
+    "escape": true
+  }
+}

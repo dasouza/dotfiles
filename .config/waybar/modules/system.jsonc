@@ -1,0 +1,24 @@
+{
+  // Bar text, hover tooltip and warning/critical class come from scripts/sysinfo.sh
+  "custom/cpu": {
+    "exec": "$HOME/.config/waybar/scripts/sysinfo.sh cpu",
+    "return-type": "json",
+    "interval": 10,
+    "format": "󰻠 <span size='11pt'>{}</span>",
+    "escape": true
+  },
+  "custom/temperature": {
+    "exec": "$HOME/.config/waybar/scripts/sysinfo.sh temp",
+    "return-type": "json",
+    "interval": 10,
+    "format": "{icon} <span size='11pt'>{}</span>",
+    "escape": true,
+    // Picked by the script's percentage: three levels up to 80°C, the last one is critical
+    "format-icons": [
+      "",
+      "",
+      "",
+      "󱗗"
+    ]
+  }
+}

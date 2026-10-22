@@ -1,0 +1,25 @@
+{
+  "clock": {
+    "timezone": "Atlantic/Canary",
+    "format": " <span size='11pt'>{:%H:%M }</span>",
+    "format-alt": "󰃱 <span size='11pt'>{:%d %B %Y}</span>",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    // Scroll over the clock to page through months in the calendar tooltip, right click for this month
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "weeks-pos": "left",
+      "format": {
+        "months": "<span color='#e0b070'><b>{}</b></span>",
+        "weeks": "<span color='#6c7086'>W{}</span>",
+        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "",
+    "format-icons": {
+      "headphone": "󰋋",
+      "headset": "󰋋",
+      "hands-free": "󰋋",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol",
+    "tooltip-format": "Output: {volume}%"
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "",
+    "format-source-muted": ""
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+  // Now playing (Spotify or any MPRIS player): click play/pause, scroll skips, right click opens Spotify's scratchpad
+  "mpris": {
+    "player": "spotify",
+    "format": "{player_icon} <span size='11pt'>{title}</span>",
+    "format-paused": "{status_icon} <span size='11pt'>{title}</span>",
+    "title-len": 28,
+    "player-icons": {
+      "default": "󰎆",
+      "spotify": ""
+    },
+    "status-icons": {
+      "paused": "󰏤"
+    },
+    "tooltip-format": "{artist} — {title}\n{album}",
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "hyprctl dispatch 'hl.dsp.workspace.toggle_special(\"music\")'",
+    "on-scroll-up": "playerctl -p spotify previous",
+    "on-scroll-down": "playerctl -p spotify next"
+  },
+  // Shows the active keybind submap (e.g. "resize" after Super+R); hidden otherwise
+  "hyprland/submap": {
+    "format": "󰩨 {}",
+    "tooltip": false
+  }
+}

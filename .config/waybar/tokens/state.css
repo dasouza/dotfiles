@@ -1,0 +1,30 @@
+#custom-tray-arrow.inhibited-none,
+#custom-tray-arrow.dnd-none,
+#battery.charging,
+#power-profiles-daemon.power-saver {
+  color: #a6e3a1;
+}
+
+
+#idle_inhibitor.activated,
+#custom-cpu.warning,
+#custom-disk.warning,
+#custom-memory.warning,
+#battery.warning:not(.charging),
+#custom-tray-arrow.notification,
+#custom-tray-arrow.dnd-notification,
+#custom-tray-arrow.inhibited-notification {
+  color: #f9e2af;
+}
+
+#network.disabled,
+#custom-cpu.critical,
+#custom-disk.critical,
+#custom-memory.critical,
+#custom-temperature.critical,
+#battery.critical:not(.charging),
+#power-profiles-daemon.performance,
+#custom-tray-arrow.dnd-inhibited-none,
+#custom-tray-arrow.dnd-inhibited-notification {
+  color: #f38ba8;
+}

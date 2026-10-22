@@ -1,0 +1,14 @@
+{
+  // Desktop: the only battery is the Logitech PRO X 2 mouse (hidpp), so no time/power/cycle fields
+  "battery": {
+    "bat": "hidpp_battery_0",
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "󰍽 <span size='11pt'>{capacity}%</span>",
+    "format-charging": "󰍽<span size='12pt'>󱐌</span> <span size='11pt'>{capacity}%</span>",
+    "tooltip-format": "PRO X 2 mouse: {capacity}%"
+  }
+}

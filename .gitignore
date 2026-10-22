@@ -1,0 +1,5 @@
+# Local backups
+*.bak
+*.pre-dotfiles
+*.grey
+*.cyan

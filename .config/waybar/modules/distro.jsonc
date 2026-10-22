@@ -1,0 +1,47 @@
+{
+  "custom/distro": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/terminal": {
+    "format": "󰆍",
+    "on-click": "ghostty",
+    "tooltip": false
+  },
+  "custom/code": {
+    "format": "󰨞",
+    "on-click": "code",
+    "tooltip": false
+  },
+  "custom/obsidian": {
+    "format": "󰹕",
+    "on-click": "obsidian",
+    "tooltip": false
+  },
+  "custom/office": {
+    "format": "󰏆",
+    "on-click": "libreoffice",
+    "tooltip": false
+  },
+  "custom/files": {
+    "format": "",
+    "on-click": "dolphin",
+    "tooltip": false
+  },
+  "custom/spotify": {
+    "format": "",
+    "on-click": "spotify",
+    "tooltip": false
+  },
+  "custom/browser": {
+    "format": "",
+    "on-click": "firefox",
+    "tooltip": false
+  },
+  "custom/keybinds": {
+    "format": "󰌌",
+    "on-click": "$HOME/.config/hypr/scripts/keybinds.sh",
+    "on-click-right": "$HOME/.config/hypr/scripts/keybinds.sh html",
+    "tooltip-format": "Keybinds: click to search (Super+F1), right click for the printable sheet"
+  }
+}
