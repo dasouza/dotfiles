@@ -26,11 +26,17 @@ local function note(keys, desc)
     cheatsheet[#cheatsheet + 1] = { section = currentSection, keys = keys, desc = desc }
 end
 
--- Toggle special workspace `name`, first launching `cmd` into it if no `class` window exists yet
-local function scratchpad(name, class, cmd)
+-- Toggle special workspace `name`, first launching `cmd` into it if no `class` window exists yet.
+-- With class = nil it checks the special workspace itself instead (for apps whose class is shared
+-- with their normal windows); extra exec `rules` (float, size...) then apply only to that launch
+local function scratchpad(name, class, cmd, rules)
     return function()
-        if #hl.get_windows({ class = class }) == 0 then
-            hl.dispatch(hl.dsp.exec_cmd(cmd, { workspace = "special:" .. name }))
+        local missing = class and #hl.get_windows({ class = class }) == 0
+                        or not class and #hl.get_workspace_windows("special:" .. name) == 0
+        if missing then
+            local r = { workspace = "special:" .. name }
+            for k, v in pairs(rules or {}) do r[k] = v end
+            hl.dispatch(hl.dsp.exec_cmd(cmd, r))
         end
         hl.dispatch(hl.dsp.workspace.toggle_special(name))
     end
@@ -128,11 +134,15 @@ key(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), "Next works
 key(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }), "Previous workspace")
 
 -- Dropdown terminal on the key left of 1 (º on the Spanish layout; code:49 works on any layout)
--- and Spotify; each is launched on first use. Their float/size rules are in rules.lua
+-- Spotify and Dolphin; each is launched on first use. Their float/size rules are in rules.lua
 section("Scratchpads")
 key(mainMod .. " + code:49",   scratchpad("term", "com.mitchellh.ghostty.dropdown",
                                           programs.terminal .. " --class=com.mitchellh.ghostty.dropdown"), "Dropdown terminal")
 key(mainMod .. " + SHIFT + M", scratchpad("music", "spotify", "spotify"), "Spotify")
+-- Dolphin shares its class with the Super+E windows, so it's tracked by workspace and sized via exec rules
+key(mainMod .. " + SHIFT + E", scratchpad("files", nil, programs.fileManager,
+                                          { float = true, size = "(monitor_w*0.6) (monitor_h*0.7)", center = true }),
+                                          "File manager scratchpad")
 key(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"), "Show / hide scratchpad")
 key(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }), "Move window to scratchpad")
 

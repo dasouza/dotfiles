@@ -115,8 +115,23 @@ hl.window_rule({
     workspace = "special:music silent",
     float  = true,
     center = true,
+    -- Spotify keeps requesting activation while hidden, which marks special:music urgent (red in waybar)
+    suppress_event = "activate",
     size   = { "(monitor_w*0.6)", "(monitor_h*0.7)" },
 })
+-- Spotify maps with an empty class and sets it afterwards, so the rule above can miss it.
+-- Catch the late class change and apply the same placement by hand.
+hl.on("window.class", function(w)
+    if not w or not (w.class or ""):match("^[Ss]potify$") then return end
+    if w.workspace and w.workspace.name == "special:music" then return end
+    hl.dispatch(hl.dsp.window.float({ action = "enable", window = w }))
+    if w.monitor then
+        local mw, mh = w.monitor.width / w.monitor.scale, w.monitor.height / w.monitor.scale
+        hl.dispatch(hl.dsp.window.resize({ x = math.floor(mw * 0.6), y = math.floor(mh * 0.7), window = w }))
+    end
+    hl.dispatch(hl.dsp.window.move({ workspace = "special:music", follow = false, window = w }))
+    hl.dispatch(hl.dsp.window.center({ window = w }))
+end)
 
 -- Pause notifications (dunst do-not-disturb) while the game workspace (10) is active.
 -- A marker file records that the pause was ours, so a DND you had already set from waybar is left alone.

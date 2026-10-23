@@ -21,7 +21,10 @@
       // --- Apps ---
       "steam": "",
       "discord": "",
-      "slack": "",
+      // Keys are regexes over "class<C> title<T>"; class+title rules outrank class-only ones.
+      // Slack puts "N new item(s)" in its title while there are unreads
+      "class<slack>": "",
+      "class<slack> title<.*\\d+ new item.*>": "<span color='#ff6b5e'></span>",
       "spotify": "",
       "bitwarden": "",
       "org.kde.kdeconnect.app": "󰦉",
