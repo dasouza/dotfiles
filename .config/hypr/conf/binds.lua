@@ -5,6 +5,7 @@
 local programs = require("conf.programs")
 local mainMod  = "SUPER" -- Sets "Windows" key as main modifier
 local volume   = "~/.config/hypr/scripts/volume.sh" -- wpctl + a dunst progress-bar OSD
+local brightness = "~/.config/hypr/scripts/brightness.sh" -- brightnessctl + the same OSD
 
 -- Cheatsheet: every bind made with key() is also recorded here, grouped by the current section(),
 -- and written to $XDG_RUNTIME_DIR/hypr/keybinds.tsv on start/reload for scripts/keybinds.sh
@@ -155,8 +156,10 @@ key(mainMod .. " + Print",         hl.dsp.exec_cmd("hyprshot -m region -o ~/Pict
 key(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m window -o ~/Pictures/Screenshots"), "Window → file")
 key(mainMod .. " + CTRL + Print",  hl.dsp.exec_cmd("hyprshot -m output -o ~/Pictures/Screenshots"), "Screen → file")
 
--- Multimedia keys for volume (with an on-screen progress bar); media keys require playerctl
+-- Multimedia keys for volume and screen brightness (with an on-screen progress bar); media keys require playerctl
 section("Media")
+key("XF86MonBrightnessUp",   hl.dsp.exec_cmd(brightness .. " up"),   "Brightness up",   { locked = true, repeating = true })
+key("XF86MonBrightnessDown", hl.dsp.exec_cmd(brightness .. " down"), "Brightness down", { locked = true, repeating = true })
 key("XF86AudioRaiseVolume", hl.dsp.exec_cmd(volume .. " up"),   "Volume up",     { locked = true, repeating = true })
 key("XF86AudioLowerVolume", hl.dsp.exec_cmd(volume .. " down"), "Volume down",   { locked = true, repeating = true })
 key("XF86AudioMute",        hl.dsp.exec_cmd(volume .. " mute"), "Mute",          { locked = true })
@@ -175,6 +178,7 @@ local keyNames = {
     mouse_down = "Scroll down", mouse_up = "Scroll up", escape = "Esc", Return = "Enter",
     XF86AudioRaiseVolume = "Vol+", XF86AudioLowerVolume = "Vol−", XF86AudioMute = "Mute",
     XF86AudioMicMute = "Mic mute", XF86AudioPlay = "Play", XF86AudioNext = "Next", XF86AudioPrev = "Prev",
+    XF86MonBrightnessUp = "Bright+", XF86MonBrightnessDown = "Bright−",
 }
 local function prettyKeys(keys)
     return (keys:gsub("[^%s+/]+", function(word) return keyNames[word] or word end))
