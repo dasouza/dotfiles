@@ -26,7 +26,7 @@ Scope {
     }
     Process {
         id: brightnessctl
-        command: ["brightnessctl", "-m"]
+        command: ["brightnessctl", "-c", "backlight", "-m"]
         stdout: StdioCollector {
             onStreamFinished: {
                 // "intel_backlight,backlight,12000,50%,24000": device,class,current,percent,max

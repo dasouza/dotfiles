@@ -160,10 +160,11 @@ key("XF86AudioPlay",        hl.dsp.exec_cmd("playerctl play-pause"), "Play / pau
 key("XF86AudioNext",        hl.dsp.exec_cmd("playerctl next"),       "Next track",   { locked = true })
 key("XF86AudioPrev",        hl.dsp.exec_cmd("playerctl previous"),   "Previous track", { locked = true })
 hl.bind("XF86AudioPause",   hl.dsp.exec_cmd("playerctl play-pause"), { locked = true, description = "Play / pause" })
--- Screen brightness (laptops; nothing happens without a backlight). -e4 makes the steps even to the eye,
--- -n2 never turns the panel fully off. The OSD reads the new level back from brightnessctl.
+-- Screen brightness (laptops). -c backlight: without it, brightnessctl falls back to any LED (Caps Lock...)
+-- on machines with no backlight; with it, the command just fails there. -e4 makes the steps even to the
+-- eye, -n2 never turns the panel fully off. The OSD reads the new level back from brightnessctl.
 local function brightness(change)
-    return hl.dsp.exec_cmd("brightnessctl -e4 -n2 set " .. change .. " && qs ipc call osd brightness")
+    return hl.dsp.exec_cmd("brightnessctl -c backlight -e4 -n2 set " .. change .. " && qs ipc call osd brightness")
 end
 key("XF86MonBrightnessUp",   brightness("5%+"), "Brightness up",   { locked = true, repeating = true })
 key("XF86MonBrightnessDown", brightness("5%-"), "Brightness down", { locked = true, repeating = true })
