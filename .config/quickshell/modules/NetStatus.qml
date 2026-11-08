@@ -5,7 +5,7 @@ import Quickshell.Networking
 import Quickshell.Bluetooth
 import qs
 
-// Ethernet, Wi-Fi and Bluetooth state.
+// Ethernet, Wi-Fi and Bluetooth state; each has a hover card with the details.
 // Click opens the Wi-Fi picker / nm-connection-editor (ethernet) / blueman-manager;
 // right-click toggles Bluetooth.
 RowLayout {
@@ -31,7 +31,7 @@ RowLayout {
     }
 
     // Ethernet: plugged in and connected, or cable in but no IP yet.
-    // Hovering shows the interface name and its IPv4 address(es).
+    // Hovering shows the connection, link speed, live traffic and addresses (EthernetCard).
     Icon {
         id: ethernet
         visible: root.wired?.hasLink ?? false
@@ -43,16 +43,16 @@ RowLayout {
             id: ethHover
         }
 
-        IfacePopup {
+        EthernetCard {
             id: ethPopup
             owner: ethernet
             ownerHovered: ethHover.hovered
-            iface: root.wired?.name ?? ""
+            device: root.wired
         }
     }
 
     // Wi-Fi: off, disconnected, or five signal levels.
-    // Hovering shows the interface, the network and signal, and its IPv4 address(es).
+    // Hovering shows the network, signal, band, link speed, live traffic and addresses (WifiCard).
     Icon {
         id: wifiIcon
         visible: root.wifi !== null
@@ -72,29 +72,40 @@ RowLayout {
             device: root.wifi
         }
 
-        // Not while the picker is open: it already shows the same.
-        IfacePopup {
+        // Not while the picker is open: it already shows the network.
+        WifiCard {
             id: wifiPopup
             owner: wifiIcon
             ownerHovered: wifiHover.hovered && !picker.open
-            iface: root.wifi?.name ?? ""
-            detail: !Networking.wifiEnabled ? "Wi-Fi off"
-                : !root.wifiNetwork ? "Not connected"
-                : `${root.wifiNetwork.name} · ${Math.round(root.wifiNetwork.signalStrength * 100)}%`
+            device: root.wifi
+            network: root.wifiNetwork
         }
     }
 
     // Bluetooth: off, on, or with a device connected.
+    // Hovering shows the paired devices with their battery (BluetoothCard).
     Icon {
+        id: btIcon
         visible: root.bluetooth !== null
         readonly property bool connected: root.bluetooth?.devices.values.some(d => d.connected) ?? false
         text: String.fromCodePoint(!root.bluetooth?.enabled ? 0xf00b2 : connected ? 0xf00b1 : 0xf00af)
-        color: !root.bluetooth?.enabled ? Theme.textDim : connected ? Theme.accent : Theme.text
+        color: btPopup.open ? Theme.accent : !root.bluetooth?.enabled ? Theme.textDim : connected ? Theme.accent : Theme.text
         action: button => {
             if (button === Qt.RightButton)
                 root.bluetooth.enabled = !root.bluetooth.enabled;
             else
                 Quickshell.execDetached(["blueman-manager"]);
+        }
+
+        HoverHandler {
+            id: btHover
+        }
+
+        BluetoothCard {
+            id: btPopup
+            owner: btIcon
+            ownerHovered: btHover.hovered
+            adapter: root.bluetooth
         }
     }
 }
