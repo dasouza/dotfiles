@@ -35,6 +35,7 @@ Variants {
             Item { Layout.fillWidth: true }
             Tray {}
             NetStatus {}
+            Warp {}
             Battery {}
             PowerMode {}
             Caffeine {}
