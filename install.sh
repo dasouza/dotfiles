@@ -155,8 +155,8 @@ EOF
 # Dim the panel ($((dim / 60)) min), restore on activity
 listener {
     timeout = $dim
-    on-timeout = brightnessctl -s set 10
-    on-resume = brightnessctl -r
+    on-timeout = brightnessctl -c backlight -s set 10
+    on-resume = brightnessctl -c backlight -r
 }
 
 EOF
