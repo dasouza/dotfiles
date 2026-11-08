@@ -27,7 +27,8 @@ git clone https://github.com/dasouza/dotfiles ~/Repos/dotfiles
 - links `quickshell.service` into `~/.config/systemd/user/`. Hyprland starts it, along with
   hyprpaper, hypridle and hyprpolkitagent, as systemd user units.
 - removes dangling links left behind by configs that were dropped from the repo.
-- writes `hypr/local.lua` from the detected GPU(s), keyboard layout and battery (see below).
+- writes `hypr/local.lua` from the detected GPU(s), keyboard layout and battery, and
+  `hypr/hypridle.local.conf` with desktop or laptop idle timeouts (see below).
 - prints the `pacman` command for any missing packages, plus anything left to do by hand.
 
 Then set a wallpaper and log in to Hyprland:
@@ -43,6 +44,7 @@ These files are git-ignored, so every machine keeps its own:
 | File | What |
 |---|---|
 | `hypr/local.lua` | Monitors, keyboard layout, touchpad, GPU environment variables. Loaded last, so it can override anything. `install.sh` only writes it when it doesn't exist; delete it to regenerate. |
+| `hypr/hypridle.local.conf` | Idle timeouts, sourced from `hypridle.conf`. Desktops lock at 30 min and never suspend; laptops dim at 4 min, lock at 5 and suspend at 15. `install.sh` only writes it when it doesn't exist; delete it to regenerate. |
 | `hypr/wallpaper` | Symlink to the image used by hyprpaper and hyprlock |
 
 A desktop's `local.lua` might look like this:

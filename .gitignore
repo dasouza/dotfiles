@@ -1,5 +1,6 @@
 # Per-machine files (see README, "Per-machine settings")
 .config/hypr/local.lua
+.config/hypr/hypridle.local.conf
 .config/hypr/wallpaper
 
 # Local backups
