@@ -1,0 +1,12 @@
+# Linked into ~/.config/systemd/user/; started from hypr/hyprland.lua like the other daemons.
+[Unit]
+Description=Quickshell (bar, notifications, launcher, power menu, volume OSD)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+# Qt's text-input bookkeeping logs harmless enable/disableSurface warnings whenever keyboard
+# focus moves between Quickshell's windows (launcher, power menu, notification centre).
+Environment=QT_LOGGING_RULES=qt.qpa.wayland.textinput=false
+ExecStart=/usr/bin/qs
+Restart=on-failure

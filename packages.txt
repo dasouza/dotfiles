@@ -1,0 +1,51 @@
+# Arch packages these configs use (all in the official repos). install.sh lists the missing ones.
+# GPU drivers aren't here: install.sh adds nvidia-utils when it finds an NVIDIA card.
+
+# Compositor and its ecosystem
+hyprland
+hypridle
+hyprlock
+hyprpaper
+hyprpolkitagent
+hyprlauncher
+hyprpicker
+hyprshot
+hyprshutdown
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+
+# Shell: bar, notifications, launcher, OSD, power menu
+quickshell
+hwdata
+libnotify
+
+# Services the bar and keybinds talk to
+networkmanager
+network-manager-applet
+bluez
+blueman
+upower
+power-profiles-daemon
+wireplumber
+playerctl
+brightnessctl
+
+# Clipboard
+cliphist
+wl-clipboard
+wl-clip-persist
+
+# Apps
+ghostty
+dolphin
+xdg-utils
+
+# KDE/Qt integration outside Plasma: file picker, Breeze theme, app menu for Dolphin, KWallet unlock
+xdg-desktop-portal-kde
+plasma-integration
+archlinux-xdg-menu
+kwallet-pam
+
+# Fonts and cursor
+ttf-jetbrains-mono-nerd
+breeze

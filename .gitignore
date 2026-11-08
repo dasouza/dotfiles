@@ -1,0 +1,8 @@
+# Per-machine files (see README, "Per-machine settings")
+.config/hypr/local.lua
+.config/hypr/wallpaper
+
+# Local backups
+*.bak
+*.pre-dotfiles
+*.pre-dotfiles.*
